@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TenantsPanel } from "./_components/tenants-panel";
 
 const onboardingSteps = [
   {
@@ -137,6 +138,10 @@ export default function SuperadminAccess() {
               </div>
             </div>
           </div>
+        </section>
+
+        <section>
+          <TenantsPanel />
         </section>
       </div>
     </div>
