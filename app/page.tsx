@@ -51,10 +51,10 @@ const samplePayload = `{
 
 const highlightModules = [
   { name: "Admissions", price: "Included", detail: "Bed & ward orchestration with cross-branch transfers." },
-  { name: "OPD", price: "$39", detail: "Token queues, vitals capture and doctor calendar sync." },
-  { name: "Billing", price: "$35", detail: "Multi-branch cashiering, receivables and audit logs." },
-  { name: "Laboratory", price: "$19", detail: "Sample tracking and smart result templates." },
-  { name: "Pharmacy", price: "$25", detail: "Inventory, dispensing and supplier reconciliation." },
+  { name: "OPD", price: "₹39", detail: "Token queues, vitals capture and doctor calendar sync." },
+  { name: "Billing", price: "₹35", detail: "Multi-branch cashiering, receivables and audit logs." },
+  { name: "Laboratory", price: "₹19", detail: "Sample tracking and smart result templates." },
+  { name: "Pharmacy", price: "₹25", detail: "Inventory, dispensing and supplier reconciliation." },
 ];
 
 export default function Home() {
@@ -90,7 +90,7 @@ export default function Home() {
             <div className="mt-6 space-y-4 text-sm">
               <div>
                 <p className="text-slate-400">Current MRR</p>
-                <p className="text-3xl font-semibold text-emerald-300">$18,640</p>
+                <p className="text-3xl font-semibold text-emerald-300">₹18,640</p>
               </div>
               <div>
                 <p className="text-slate-400">Active hospitals</p>
