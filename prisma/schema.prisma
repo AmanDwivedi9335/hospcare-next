@@ -101,7 +101,7 @@ model Plan {
   description   String?
   billingCycle  BillingCycle   @default(MONTHLY)
   price         Decimal        @db.Decimal(10, 2)
-  currency      String         @default("USD")
+  currency      String         @default("INR")
   planModules   PlanModule[]
   subscriptions Subscription[]
   createdAt     DateTime       @default(now())
@@ -150,7 +150,7 @@ model SubscriptionInvoice {
   id             String       @id @default(cuid())
   subscriptionId String
   amount         Decimal      @db.Decimal(10, 2)
-  currency       String       @default("USD")
+  currency       String       @default("INR")
   dueDate        DateTime
   paid           Boolean      @default(false)
   subscription   Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)

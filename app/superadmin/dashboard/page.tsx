@@ -4,14 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const incomeWidgets = [
-  { title: "OPD Income", amount: "$23,040", detail: "Today", accent: "from-pink-500 to-rose-500" },
-  { title: "IPD Income", amount: "$19,640", detail: "Today", accent: "from-orange-500 to-amber-500" },
-  { title: "Pharmacy Income", amount: "$32,244", detail: "Today", accent: "from-teal-500 to-emerald-500" },
-  { title: "Pathology Income", amount: "$18,090", detail: "Today", accent: "from-cyan-500 to-sky-500" },
-  { title: "Blood Bank", amount: "$4,830", detail: "Today", accent: "from-fuchsia-500 to-purple-500" },
-  { title: "Ambulance", amount: "$9,260", detail: "Today", accent: "from-blue-500 to-indigo-500" },
-  { title: "General Income", amount: "$12,041", detail: "Today", accent: "from-emerald-500 to-lime-500" },
-  { title: "Radiology", amount: "$21,809", detail: "Today", accent: "from-slate-600 to-slate-900" },
+  { title: "OPD Income", amount: "₹23,040", detail: "Today", accent: "from-pink-500 to-rose-500" },
+  { title: "IPD Income", amount: "₹19,640", detail: "Today", accent: "from-orange-500 to-amber-500" },
+  { title: "Pharmacy Income", amount: "₹32,244", detail: "Today", accent: "from-teal-500 to-emerald-500" },
+  { title: "Pathology Income", amount: "₹18,090", detail: "Today", accent: "from-cyan-500 to-sky-500" },
+  { title: "Blood Bank", amount: "₹4,830", detail: "Today", accent: "from-fuchsia-500 to-purple-500" },
+  { title: "Ambulance", amount: "₹9,260", detail: "Today", accent: "from-blue-500 to-indigo-500" },
+  { title: "General Income", amount: "₹12,041", detail: "Today", accent: "from-emerald-500 to-lime-500" },
+  { title: "Radiology", amount: "₹21,809", detail: "Today", accent: "from-slate-600 to-slate-900" },
 ];
 
 const monthlySegments = [
@@ -237,8 +237,8 @@ const sidebarSections: SidebarSection[] = [
 ];
 
 const revenueSummary = [
-  { label: "Collections", value: "$112,400", change: "+8.2%" },
-  { label: "Expenses", value: "$78,210", change: "+1.4%" },
+  { label: "Collections", value: "₹112,400", change: "+8.2%" },
+  { label: "Expenses", value: "₹78,210", change: "+1.4%" },
 ];
 
 const scheduledEvents = [
