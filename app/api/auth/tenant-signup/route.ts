@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const moduleIds = payload.moduleIds.length
       ? payload.moduleIds
       : plan.planModules
-          .filter((planModule: Prisma.PlanModule) => planModule.included)
+          .filter((planModule) => planModule.included)
           .map((planModule) => planModule.moduleId);
 
     const now = new Date();
