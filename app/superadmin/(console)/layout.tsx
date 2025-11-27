@@ -8,7 +8,9 @@ type SidebarIconProps = {
   className?: string;
 };
 
-type SidebarIcon = (props: SidebarIconProps) => JSX.Element;
+type SidebarIcon = ((props: SidebarIconProps) => JSX.Element) & {
+  displayName?: string;
+};
 
 type SidebarItem = {
   label: string;
@@ -25,7 +27,7 @@ type SuperadminLayoutProps = {
   children: ReactNode;
 };
 
-const createIcon = (children: React.ReactNode, name: string): SidebarIcon => {
+const createIcon = (children: ReactNode, name: string): SidebarIcon => {
   const IconComponent: SidebarIcon = ({ className = "h-5 w-5" }) => (
     <svg
       viewBox="0 0 24 24"
