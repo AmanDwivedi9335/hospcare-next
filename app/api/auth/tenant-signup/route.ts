@@ -21,7 +21,9 @@ export async function POST(request: Request) {
 
     const moduleIds = payload.moduleIds.length
       ? payload.moduleIds
-      : plan.planModules.filter((pm) => pm.included).map((pm) => pm.moduleId);
+      : plan.planModules
+          .filter((planModule: Prisma.PlanModule) => planModule.included)
+          .map((planModule) => planModule.moduleId);
 
     const now = new Date();
     const billingCycle = payload.billingCycle ?? plan.billingCycle;
