@@ -1,4 +1,4 @@
-import { BillingCycle, SubscriptionStatus } from "@prisma/client";
+import { BillingCycle, SubscriptionStatus } from "../../app/generated/prisma/enums";
 
 export function addDays(date: Date, days: number) {
   const result = new Date(date);

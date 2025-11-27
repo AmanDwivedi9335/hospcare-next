@@ -1,4 +1,4 @@
-import { BillingCycle } from "@prisma/client";
+import { BillingCycle } from "../../app/generated/prisma/enums";
 import { z } from "zod";
 
 const addressSchema = z
