@@ -16,6 +16,11 @@ type Patient = {
   email?: string;
   maritalStatus?: string;
   bloodGroup?: string;
+  dob?: string;
+  remarks?: string;
+  allergies?: string;
+  nationalId?: string;
+  alternateNumber?: string;
 };
 
 type ColumnKey = "age" | "gender" | "phone" | "guardian" | "address" | "action";
@@ -380,8 +385,13 @@ function AddPatientModal({
                 age: ageLabel || "Not provided",
                 gender: (form.gender as Patient["gender"]) || "Male",
                 phone: form.phone || "-",
+                dob: form.dob,
+                remarks: form.remarks,
+                allergies: form.allergies,
                 guardian: form.guardian || "",
                 address: form.address || "",
+                nationalId: form.nationalId,
+                alternateNumber: form.alternateNumber,
                 tpa: form.tpa || "",
                 tpaId: form.tpaId || "",
                 tpaValidity: form.tpaValidity || "",
