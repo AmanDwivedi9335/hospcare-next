@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import type { Prisma } from "@prisma/client";
+import type { Prisma } from "@/app/generated/prisma/client";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
 import { createTenantSchema } from "@/lib/validators/tenant";
