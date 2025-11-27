@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { resolveSubscriptionDates } from "@/lib/utils/billing";
 import { tenantSignupSchema } from "@/lib/validators/tenant";
 
+type PlanModuleRecord = { moduleId: number; included: boolean };
+
 export async function POST(request: Request) {
   try {
     const payload = tenantSignupSchema.parse(await request.json());
@@ -22,8 +24,8 @@ export async function POST(request: Request) {
     const moduleIds = payload.moduleIds.length
       ? payload.moduleIds
       : plan.planModules
-          .filter((planModule) => planModule.included)
-          .map((planModule) => planModule.moduleId);
+          .filter((planModule: PlanModuleRecord) => planModule.included)
+          .map((planModule: PlanModuleRecord) => planModule.moduleId);
 
     const now = new Date();
     const billingCycle = payload.billingCycle ?? plan.billingCycle;
