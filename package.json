@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:generate": "rm -rf node_modules/.prisma/client && prisma generate",
+    "db:generate": "rimraf node_modules/.prisma/client && prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate deploy",
     "db:studio": "prisma studio",
@@ -30,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "rimraf": "^6.1.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
