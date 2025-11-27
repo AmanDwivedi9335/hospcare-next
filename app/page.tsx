@@ -59,19 +59,18 @@ const highlightModules = [
 
 export default function Home() {
   return (
-    <div className="bg-slate-950 text-slate-100">
-      <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-16 px-6 py-16 lg:px-10">
-        <section className="grid gap-8 lg:grid-cols-[3fr,2fr] lg:items-center">
+    <div className="relative overflow-hidden">
+      <div className="absolute inset-x-0 -top-20 -z-10 h-64 bg-emerald-500/10 blur-3xl" aria-hidden />
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-16 lg:px-10">
+        <section className="grid gap-12 lg:grid-cols-[3fr,2fr] lg:items-center">
           <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">
-              HospCare SaaS Platform
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-200">HospCare SaaS Platform</p>
             <h1 className="text-4xl font-semibold leading-tight text-white md:text-5xl">
               Sell Smart Hospital as a subscription product.
             </h1>
             <p className="text-lg text-slate-300">
-              This Next.js starter stitches Prisma + PostgreSQL, module aware billing and API-first route handlers so you can
-              onboard hospitals, branch facilities and staff in minutes. The backend is Flutter-ready and superadmin friendly.
+              This starter stitches Prisma + PostgreSQL, module aware billing and API-first route handlers so you can onboard
+              hospitals, branch facilities and staff in minutes. The backend is Flutter-ready and superadmin friendly.
             </p>
             <div className="flex flex-wrap gap-4 text-sm text-slate-300">
               {roadmap.map((item) => (
@@ -81,8 +80,22 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <div className="flex flex-wrap gap-3 text-sm font-semibold">
+              <a
+                className="rounded-full bg-emerald-500 px-5 py-3 text-slate-900 transition hover:bg-emerald-400"
+                href="/pricing"
+              >
+                Launch a plan
+              </a>
+              <a
+                className="rounded-full border border-slate-800 px-5 py-3 text-slate-100 transition hover:border-emerald-400/60"
+                href="/contact"
+              >
+                Talk to sales
+              </a>
+            </div>
           </div>
-          <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-800 p-6">
+          <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-800 p-6 shadow-xl">
             <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-slate-500">
               <span>Postgres + Prisma</span>
               <span>Multi-tenant</span>
@@ -108,7 +121,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="grid gap-6 md:grid-cols-3">
+        <section className="grid gap-6 md:grid-cols-3" id="features">
           {features.map((feature) => (
             <article key={feature.title} className="rounded-3xl border border-slate-900 bg-slate-900/40 p-6">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">{feature.title}</p>
@@ -117,7 +130,7 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="rounded-3xl border border-slate-900 bg-slate-900/40 p-6">
+        <section className="rounded-3xl border border-slate-900 bg-slate-900/40 p-6" id="modules">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Module catalog</p>
@@ -131,7 +144,7 @@ export default function Home() {
               <p className="text-slate-400">POST /api/modules</p>
               <p className="mt-2 text-xs text-slate-500">Body</p>
               <pre className="mt-2 overflow-x-auto rounded-xl bg-black/40 p-3 text-[11px] text-slate-200">
-{`{
+{`{ 
   "name": "Dialysis",
   "code": "DIALYSIS",
   "category": "Clinical",
@@ -154,7 +167,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-900 bg-slate-900/40 p-6">
+        <section className="rounded-3xl border border-slate-900 bg-slate-900/40 p-6" id="apis">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">API surface</p>
@@ -185,6 +198,29 @@ export default function Home() {
                 helper in <code className="rounded bg-slate-800 px-1">lib/utils/billing.ts</code>.
               </p>
             </div>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4 rounded-3xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-200">Launch faster</p>
+          <h3 className="text-3xl font-semibold text-white">Provision your first hospital in under 10 minutes.</h3>
+          <p className="text-base text-slate-300">
+            Use the ready-made modules, billing helpers and API contracts to keep frontend and mobile teams unblocked. HospCare
+            ships with a superadmin console, Prisma migrations and tenant aware guards out of the box.
+          </p>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-3 text-sm font-semibold">
+            <a
+              className="rounded-full bg-white px-5 py-3 text-slate-900 transition hover:bg-emerald-100"
+              href="/features"
+            >
+              Explore features
+            </a>
+            <a
+              className="rounded-full border border-emerald-300/50 px-5 py-3 text-emerald-100 transition hover:bg-emerald-500/10"
+              href="/contact"
+            >
+              Book onboarding
+            </a>
           </div>
         </section>
       </main>
