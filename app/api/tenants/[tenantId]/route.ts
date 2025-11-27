@@ -1,16 +1,13 @@
 import { Prisma } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
 import { updateTenantSchema } from "@/lib/validators/tenant";
 
-type Params = {
-  params: {
-    tenantId: string;
-  };
-};
-
-export async function PATCH(request: Request, { params }: Params) {
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { tenantId: string } },
+) {
   const { tenantId } = params;
 
   if (!tenantId) {
