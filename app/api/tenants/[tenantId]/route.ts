@@ -6,9 +6,9 @@ import { updateTenantSchema } from "@/lib/validators/tenant";
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { tenantId: string } },
+  { params }: { params: Promise<{ tenantId: string }> },
 ) {
-  const { tenantId } = params;
+  const { tenantId } = await params;
 
   if (!tenantId) {
     return NextResponse.json({ error: "Tenant id is required" }, { status: 400 });
