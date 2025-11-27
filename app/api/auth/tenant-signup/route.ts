@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
@@ -10,6 +10,25 @@ type PlanModuleRecord = {
   moduleId: number;
   included: boolean;
 };
+
+// Narrow type for P2002 errors without depending on Prisma's error class
+type PrismaP2002Error = {
+  code: string;
+  meta?: {
+    target?: string | string[];
+    [key: string]: unknown;
+  };
+};
+
+// Type guard to detect Prisma unique constraint error (P2002)
+function isPrismaP2002Error(error: unknown): error is PrismaP2002Error {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: string }).code === "P2002"
+  );
+}
 
 export async function POST(request: Request) {
   try {
@@ -87,7 +106,8 @@ export async function POST(request: Request) {
             email: payload.adminEmail,
             passwordHash,
             tenantId: createdTenant.id,
-            role: Prisma.UserRole.HOSPITAL_ADMIN,
+            // string matches your UserRole enum value
+            role: "HOSPITAL_ADMIN",
           },
         });
 
@@ -110,15 +130,13 @@ export async function POST(request: Request) {
     );
 
     return NextResponse.json({ data: result }, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.flatten() }, { status: 422 });
     }
 
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2002"
-    ) {
+    // Handle unique constraint violations (P2002) without referencing Prisma's error class
+    if (isPrismaP2002Error(error)) {
       const target = Array.isArray(error.meta?.target)
         ? error.meta?.target.join(", ")
         : error.meta?.target;

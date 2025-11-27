@@ -1,8 +1,22 @@
-import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
 import { updateTenantSchema } from "@/lib/validators/tenant";
+
+// Narrow shape for Prisma errors we care about
+type PrismaError = {
+  code?: string;
+};
+
+// Generic helper to check Prisma error codes (P2002, P2025, etc.)
+function isPrismaErrorWithCode(error: unknown, code: string): error is PrismaError {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: string }).code === code
+  );
+}
 
 export async function PATCH(
   request: NextRequest,
@@ -30,16 +44,18 @@ export async function PATCH(
     });
 
     return NextResponse.json({ data: updatedTenant });
-  } catch (error) {
+  } catch (error: unknown) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.flatten() }, { status: 422 });
     }
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+    // Tenant not found (P2025)
+    if (isPrismaErrorWithCode(error, "P2025")) {
       return NextResponse.json({ error: "Tenant not found" }, { status: 404 });
     }
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+    // Unique constraint violation (e.g. slug) (P2002)
+    if (isPrismaErrorWithCode(error, "P2002")) {
       return NextResponse.json({ error: "Tenant slug already exists" }, { status: 409 });
     }
 

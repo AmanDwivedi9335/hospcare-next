@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
 import { createModuleSchema } from "@/lib/validators/module";
@@ -10,6 +9,25 @@ export async function GET() {
   });
 
   return NextResponse.json({ data: modules });
+}
+
+// Narrow type for the P2002 unique constraint error
+type PrismaP2002Error = {
+  code: string;
+  meta?: {
+    target?: string | string[];
+    [key: string]: unknown;
+  };
+};
+
+// Type guard to detect Prisma unique constraint error (P2002)
+function isPrismaP2002Error(error: unknown): error is PrismaP2002Error {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: string }).code === "P2002"
+  );
 }
 
 export async function POST(request: Request) {
@@ -28,15 +46,16 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ data: createdModule }, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.flatten() }, { status: 422 });
     }
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+    // Handle unique constraint violation (P2002) without using Prisma.PrismaClientKnownRequestError
+    if (isPrismaP2002Error(error)) {
       return NextResponse.json(
         { error: "Module with the provided code already exists" },
-        { status: 409 },
+        { status: 409 }
       );
     }
 
@@ -44,6 +63,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    return NextResponse.json({ error: "Unable to create module" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Unable to create module" },
+      { status: 500 }
+    );
   }
 }
