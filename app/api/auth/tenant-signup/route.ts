@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { PlanModule, Prisma } from "@prisma/client";
+import { PlanModule, Prisma, UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
           email: payload.adminEmail,
           passwordHash,
           tenantId: createdTenant.id,
-          role: Prisma.UserRole.HOSPITAL_ADMIN,
+          role: UserRole.HOSPITAL_ADMIN,
         },
       });
 
