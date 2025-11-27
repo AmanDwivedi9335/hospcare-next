@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { Prisma, type PlanModule } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { prisma } from "@/lib/prisma";
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const moduleIds = payload.moduleIds.length
       ? payload.moduleIds
       : plan.planModules
-          .filter((planModule: PlanModule) => planModule.included)
+          .filter((planModule) => planModule.included)
           .map((planModule) => planModule.moduleId);
 
     const now = new Date();
