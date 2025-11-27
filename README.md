@@ -24,8 +24,8 @@ through Next.js route handlers ready for Flutter or any other client.
 | `User`/`Staff`  | Superadmins live outside tenants. Hospital admins/staff are linked to their tenant + facility.    |
 | `Patient`/`Appointment` | Core clinical records already wired to the tenant/facility/department context.                   |
 
-The schema lives in [`prisma/schema.prisma`](prisma/schema.prisma) and the generated Prisma client is emitted at
-`app/generated/prisma` for tree-shakable imports in both server components and API handlers.
+The schema lives in [`prisma/schema.prisma`](prisma/schema.prisma) and the generated Prisma client is emitted to
+`node_modules/.prisma/client`, ready for imports in both server components and API handlers.
 
 ## Getting started
 
@@ -38,10 +38,10 @@ The schema lives in [`prisma/schema.prisma`](prisma/schema.prisma) and the gener
 2. **Configure Postgres** by copying `.env.example` to `.env` (create the file if it does not exist yet) and populate
    `DATABASE_URL` with your PostgreSQL connection string. Prisma also reads the variable when running CLI commands.
 
-3. **Generate the Prisma client**
+3. **Generate the Prisma client** (cleans any stale output first to avoid generation errors)
 
    ```bash
-   DATABASE_URL="postgres://user:pass@host:5432/hospcare" npx prisma generate
+   DATABASE_URL="postgres://user:pass@host:5432/hospcare" npm run db:generate
    ```
 
 4. **Apply the schema**
@@ -84,6 +84,7 @@ frontend or any background worker without duplicating connection logic.
 | `npm run dev`   | Next.js development server.                                   |
 | `npm run build` | Production build.                                             |
 | `npm run lint`  | ESLint for the entire workspace.                              |
+| `npm run db:generate` | Removes any existing generated client before running `prisma generate`. |
 | `npm run db:seed` | Executes `prisma/seed.mjs` to populate demo data.            |
 | `npm run db:push` | Shorthand for `prisma db push`.                              |
 | `npm run db:migrate` | Runs `prisma migrate deploy` (use in CI/CD).             |
@@ -94,7 +95,6 @@ frontend or any background worker without duplicating connection logic.
 ```
 app/
   api/                <- REST-ish route handlers for modules & tenants
-  generated/prisma/   <- Prisma client output
   page.tsx            <- Marketing/overview page for the SaaS
 lib/
   prisma.ts           <- Shared Prisma client instance
