@@ -403,7 +403,7 @@ function AddPatientModal({
               onSave(newPatient);
               onClose();
             }}
-            className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            className="rounded-lg bg-emerald-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500"
           >
             Save
           </button>
@@ -454,45 +454,54 @@ export default function PatientListPage() {
   };
 
   return (
-    <div className="bg-slate-950">
-      <div className="mx-auto max-w-6xl px-6 py-10 text-slate-50">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-xl">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+    <div className="flex flex-1 flex-col">
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Hospital</p>
+          <h1 className="text-2xl font-semibold text-slate-900">Patient Management</h1>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500"
+          >
+            + Add New Patient
+          </button>
+          <button className="rounded-full border border-slate-200 px-3 py-2 text-sm text-slate-600">Download</button>
+        </div>
+      </header>
+
+      <main className="flex-1 space-y-6 bg-slate-50 p-6">
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-emerald-200">Hospital</p>
-              <h1 className="text-2xl font-semibold text-white">Patient List</h1>
+              <p className="text-xs uppercase tracking-[0.4em] text-emerald-600">Hospital</p>
+              <h2 className="text-xl font-semibold text-slate-900">Patient List</h2>
+              <p className="text-sm text-slate-500">Manage registrations, filters, exports and quick actions.</p>
             </div>
-            <div className="flex flex-wrap items-center gap-3 text-sm">
-              <button className="rounded-lg border border-slate-700 px-4 py-2 hover:border-emerald-400/60">
-                Enabled Patient List
-              </button>
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <button className="rounded-full border border-slate-200 px-4 py-2 text-slate-600 hover:border-emerald-300">Enabled Patient List</button>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-blue-500"
+                className="rounded-full bg-emerald-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-emerald-500"
               >
                 + Add New Patient
               </button>
-              <button className="rounded-lg border border-slate-700 px-4 py-2 hover:border-emerald-400/60">
-                Import Patient
-              </button>
-              <button className="rounded-lg border border-slate-700 px-4 py-2 hover:border-emerald-400/60">
-                Download Sample File
-              </button>
-              <button className="rounded-lg border border-red-700 px-4 py-2 text-red-200 hover:border-red-400">
-                Delete Selected
-              </button>
+              <button className="rounded-full border border-slate-200 px-4 py-2 text-slate-600 hover:border-emerald-300">Import Patient</button>
+              <button className="rounded-full border border-slate-200 px-4 py-2 text-slate-600 hover:border-emerald-300">Download Sample File</button>
+              <button className="rounded-full border border-red-200 bg-red-50 px-4 py-2 text-red-600 hover:border-red-400">Delete Selected</button>
             </div>
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
             <input
-              className="w-full rounded-lg border border-slate-700 bg-slate-950/50 px-3 py-2 text-slate-100 placeholder:text-slate-500 md:w-80"
+              className="w-full rounded-full border border-slate-200 bg-white px-4 py-2 text-slate-700 placeholder:text-slate-400 md:w-80"
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
             <div className="flex flex-wrap items-center gap-2">
-              <label className="flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2">
+              <label className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-slate-600">
                 <span>Gender</span>
                 <select
                   value={genderFilter}
@@ -505,7 +514,7 @@ export default function PatientListPage() {
                   ))}
                 </select>
               </label>
-              <label className="flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2">
+              <label className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-slate-600">
                 <span>Marital Status</span>
                 <select
                   value={maritalFilter}
@@ -518,7 +527,7 @@ export default function PatientListPage() {
                   ))}
                 </select>
               </label>
-              <label className="flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2">
+              <label className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-slate-600">
                 <span>Blood Group</span>
                 <select
                   value={bloodGroupFilter}
@@ -531,16 +540,16 @@ export default function PatientListPage() {
                   ))}
                 </select>
               </label>
-              <div className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-700 px-3 py-2">
-                <span>Columns</span>
+              <div className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-slate-600">
+                <span>Column visibility:</span>
                 <div className="flex flex-wrap gap-2">
                   {(Object.keys(columnLabels) as ColumnKey[]).map((key) => (
-                    <label key={key} className="flex items-center gap-1 text-xs">
+                    <label key={key} className="flex items-center gap-1 rounded-full bg-slate-50 px-2 py-1 text-xs">
                       <input
                         type="checkbox"
                         checked={visibleColumns[key]}
                         onChange={() => toggleColumn(key)}
-                        className="accent-emerald-400"
+                        className="accent-emerald-500"
                       />
                       {columnLabels[key]}
                     </label>
@@ -550,21 +559,21 @@ export default function PatientListPage() {
             </div>
           </div>
 
-          <div className="mt-4 overflow-hidden rounded-xl border border-slate-800 bg-slate-950/50">
-            <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3 text-sm text-slate-400">
+          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   checked={selectedIds.length === filteredPatients.length && filteredPatients.length > 0}
                   onChange={(e) => toggleSelectAll(e.target.checked)}
-                  className="accent-emerald-400"
+                  className="accent-emerald-500"
                 />
                 <span>Patient Name</span>
               </div>
               <div className="flex items-center gap-3 text-xs">
                 <label className="flex items-center gap-1">
                   Show
-                  <select className="rounded border border-slate-700 bg-slate-900 px-2 py-1">
+                  <select className="rounded border border-slate-200 bg-white px-2 py-1">
                     <option>10</option>
                     <option>25</option>
                     <option>50</option>
@@ -573,16 +582,16 @@ export default function PatientListPage() {
                 <span>entries</span>
               </div>
             </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-left text-sm text-slate-200">
-                <thead className="bg-slate-900 text-xs uppercase text-slate-400">
+            <div className="overflow-x-auto bg-white">
+              <table className="min-w-full text-left text-sm text-slate-700">
+                <thead className="bg-slate-50 text-xs uppercase text-slate-500">
                   <tr>
                     <th className="px-4 py-3">
                       <input
                         type="checkbox"
                         checked={selectedIds.length === filteredPatients.length && filteredPatients.length > 0}
                         onChange={(e) => toggleSelectAll(e.target.checked)}
-                        className="accent-emerald-400"
+                        className="accent-emerald-500"
                       />
                     </th>
                     <th className="px-4 py-3">Patient Name</th>
@@ -596,34 +605,34 @@ export default function PatientListPage() {
                 </thead>
                 <tbody>
                   {filteredPatients.map((patient) => (
-                    <tr key={patient.id} className="border-t border-slate-800 hover:bg-slate-900/60">
+                    <tr key={patient.id} className="border-t border-slate-200 hover:bg-slate-50">
                       <td className="px-4 py-3">
                         <input
                           type="checkbox"
                           checked={selectedIds.includes(patient.id)}
                           onChange={(e) => toggleSelectOne(patient.id, e.target.checked)}
-                          className="accent-emerald-400"
+                          className="accent-emerald-500"
                         />
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 text-center text-sm font-semibold text-white">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 text-sm font-semibold text-white">
                             {patient.name.charAt(0)}
                           </div>
                           <div>
-                            <p className="font-semibold text-white">{patient.name}</p>
-                            <p className="text-xs text-slate-400">TPA ID: {patient.tpaId}</p>
+                            <p className="font-semibold text-slate-900">{patient.name}</p>
+                            <p className="text-xs text-slate-500">TPA ID: {patient.tpaId}</p>
                           </div>
                         </div>
                       </td>
-                      {visibleColumns.age && <td className="px-4 py-3 text-slate-300">{patient.age}</td>}
-                      {visibleColumns.gender && <td className="px-4 py-3 text-slate-300">{patient.gender}</td>}
-                      {visibleColumns.phone && <td className="px-4 py-3 text-slate-300">{patient.phone}</td>}
-                      {visibleColumns.guardian && <td className="px-4 py-3 text-slate-300">{patient.guardian}</td>}
-                      {visibleColumns.address && <td className="px-4 py-3 text-slate-300">{patient.address}</td>}
+                      {visibleColumns.age && <td className="px-4 py-3 text-slate-700">{patient.age}</td>}
+                      {visibleColumns.gender && <td className="px-4 py-3 text-slate-700">{patient.gender}</td>}
+                      {visibleColumns.phone && <td className="px-4 py-3 text-slate-700">{patient.phone}</td>}
+                      {visibleColumns.guardian && <td className="px-4 py-3 text-slate-700">{patient.guardian}</td>}
+                      {visibleColumns.address && <td className="px-4 py-3 text-slate-700">{patient.address}</td>}
                       {visibleColumns.action && (
                         <td className="px-4 py-3">
-                          <select className="rounded border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white">
+                          <select className="rounded border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700">
                             <option>Show</option>
                             <option>IPD</option>
                             <option>Pharmacy</option>
@@ -640,20 +649,20 @@ export default function PatientListPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-slate-600">
             <p>
               Showing 1 to {filteredPatients.length} of {patients.length} entries
             </p>
             <div className="flex items-center gap-2">
-              <button className="rounded-lg border border-slate-800 px-3 py-1 hover:border-emerald-400/60">Previous</button>
-              <button className="rounded-lg border border-slate-800 px-3 py-1 hover:border-emerald-400/60">1</button>
-              <button className="rounded-lg border border-slate-800 px-3 py-1 hover:border-emerald-400/60">2</button>
-              <button className="rounded-lg border border-slate-800 px-3 py-1 hover:border-emerald-400/60">3</button>
-              <button className="rounded-lg border border-slate-800 px-3 py-1 hover:border-emerald-400/60">Next</button>
+              <button className="rounded-lg border border-slate-200 px-3 py-1 hover:border-emerald-300">Previous</button>
+              <button className="rounded-lg border border-slate-200 px-3 py-1 hover:border-emerald-300">1</button>
+              <button className="rounded-lg border border-slate-200 px-3 py-1 hover:border-emerald-300">2</button>
+              <button className="rounded-lg border border-slate-200 px-3 py-1 hover:border-emerald-300">3</button>
+              <button className="rounded-lg border border-slate-200 px-3 py-1 hover:border-emerald-300">Next</button>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
       <AddPatientModal
         open={isModalOpen}
