@@ -87,8 +87,7 @@ export async function POST(request: Request) {
             email: payload.adminEmail,
             passwordHash,
             tenantId: createdTenant.id,
-            // Use Prisma enum via $Enums, or replace with "HOSPITAL_ADMIN" if preferred
-            role: Prisma.$Enums.UserRole.HOSPITAL_ADMIN,
+            role: Prisma.UserRole.HOSPITAL_ADMIN,
           },
         });
 
