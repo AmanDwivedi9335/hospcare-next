@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { resolveSubscriptionDates } from "@/lib/utils/billing";
 import { tenantSignupSchema } from "@/lib/validators/tenant";
 
+type PlanModuleRecord = { moduleId: number; included: boolean };
+
 export async function POST(request: Request) {
   try {
     const payload = tenantSignupSchema.parse(await request.json());
