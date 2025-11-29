@@ -290,7 +290,9 @@ export default function SuperadminLayout({ children }: SuperadminLayoutProps) {
           </div>
         </aside>
 
-        <div className="flex flex-1 flex-col bg-slate-50">{children}</div>
+        <div className="flex flex-1 overflow-x-auto bg-slate-50">
+          <div className="flex min-w-[1200px] flex-1 flex-col bg-slate-50">{children}</div>
+        </div>
       </div>
     </div>
   );

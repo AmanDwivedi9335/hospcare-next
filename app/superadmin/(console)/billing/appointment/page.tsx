@@ -191,7 +191,7 @@ export default function AppointmentBilling() {
           </label>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
           <table className="min-w-full text-left text-sm text-slate-700">
             <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-[0.15em] text-slate-500">
               <tr>
