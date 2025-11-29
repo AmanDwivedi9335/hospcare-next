@@ -1,9 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import type { JSX } from "react";
 
 const modules = [
-  { title: "Appointment", count: 35, icon: "calendar", accent: "from-cyan-500/80 to-cyan-600" },
+  {
+    title: "Appointment",
+    count: 35,
+    icon: "calendar",
+    accent: "from-cyan-500/80 to-cyan-600",
+    href: "/superadmin/billing/appointment",
+  },
   { title: "OPD", count: 21, icon: "crosshair", accent: "from-emerald-500/80 to-emerald-600" },
   { title: "Pathology", count: 14, icon: "flask", accent: "from-fuchsia-500/80 to-fuchsia-600" },
   { title: "Radiology", count: 12, icon: "radiology", accent: "from-indigo-500/80 to-indigo-600" },
@@ -103,23 +110,28 @@ export default function BillingConsole() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {modules.map((module) => (
-                <div
-                  key={module.title}
-                  className="group flex flex-col justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className={`rounded-2xl bg-gradient-to-br ${module.accent} p-3 text-white shadow-inner shadow-slate-300/30`}>
-                      <ModuleIcon name={module.icon as keyof typeof icons} />
+              {modules.map((module) => {
+                const Card = module.href ? Link : "div";
+
+                return (
+                  <Card
+                    key={module.title}
+                    {...(module.href ? { href: module.href } : {})}
+                    className="group flex flex-col justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className={`rounded-2xl bg-gradient-to-br ${module.accent} p-3 text-white shadow-inner shadow-slate-300/30`}>
+                        <ModuleIcon name={module.icon as keyof typeof icons} />
+                      </div>
+                      <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-500 shadow-sm">Active</span>
                     </div>
-                    <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-500 shadow-sm">Active</span>
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-slate-900">{module.title}</p>
-                    <p className="text-sm text-slate-500">{module.count} invoices</p>
-                  </div>
-                </div>
-              ))}
+                    <div>
+                      <p className="text-lg font-semibold text-slate-900">{module.title}</p>
+                      <p className="text-sm text-slate-500">{module.count} invoices</p>
+                    </div>
+                  </Card>
+                );
+              })}
             </div>
           </section>
 
