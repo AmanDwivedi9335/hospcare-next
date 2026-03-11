@@ -111,14 +111,8 @@ export default function BillingConsole() {
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {modules.map((module) => {
-                const Card = module.href ? Link : "div";
-
-                return (
-                  <Card
-                    key={module.title}
-                    {...(module.href ? { href: module.href } : {})}
-                    className="group flex flex-col justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white"
-                  >
+                const cardContent = (
+                  <>
                     <div className="flex items-start justify-between gap-3">
                       <div className={`rounded-2xl bg-gradient-to-br ${module.accent} p-3 text-white shadow-inner shadow-slate-300/30`}>
                         <ModuleIcon name={module.icon as keyof typeof icons} />
@@ -129,7 +123,24 @@ export default function BillingConsole() {
                       <p className="text-lg font-semibold text-slate-900">{module.title}</p>
                       <p className="text-sm text-slate-500">{module.count} invoices</p>
                     </div>
-                  </Card>
+                  </>
+                );
+
+                return module.href ? (
+                  <Link
+                    key={module.title}
+                    href={module.href}
+                    className="group flex flex-col justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white"
+                  >
+                    {cardContent}
+                  </Link>
+                ) : (
+                  <div
+                    key={module.title}
+                    className="group flex flex-col justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white"
+                  >
+                    {cardContent}
+                  </div>
                 );
               })}
             </div>
